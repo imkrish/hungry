@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from 'type-graphql';
+import { Dish } from '../dish/dish.types';
 
 @ObjectType()
 export class Restaurant {
@@ -13,4 +14,8 @@ export class Restaurant {
 
   @Field()
   creationDate: number;
+
+  // Field resolver will generate this
+  @Field(returns => [Dish])
+  dishes?: Dish[];
 }

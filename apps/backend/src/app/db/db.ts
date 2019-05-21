@@ -5,11 +5,13 @@ import { Dish } from '../dish/dish.types';
 interface DB {
   restaurants: { [id: string]: Restaurant };
   dishes: { [id: string]: Dish };
+  restaurantDishes: { [restaurantId: string]: string[] };
 }
 
 export let db: DB = {
   restaurants: {},
-  dishes: {}
+  dishes: {},
+  restaurantDishes: {}
 };
 
 export class DBHandler {

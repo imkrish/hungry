@@ -6,11 +6,11 @@ import * as uuid from 'uuid/v4';
 import * as R from 'ramda';
 
 export class RestaurantService {
-  findById(id: string): Restaurant {
+  findById = (id: string): Restaurant => {
     return db.restaurants[id];
-  }
+  };
 
-  findAll(paginationArgs: PaginationArgs): Restaurant[] {
+  findAll = (paginationArgs: PaginationArgs): Restaurant[] => {
     const { skip, take } = paginationArgs;
     const sortById = R.sortBy(R.prop('creationDate'));
     const skipAndTake = R.slice(skip, skip + take);
@@ -19,9 +19,9 @@ export class RestaurantService {
       sortById,
       R.values
     )(db.restaurants) as Restaurant[];
-  }
+  };
 
-  create(newRestaurantData: NewRestaurantDataInput): Restaurant {
+  create = (newRestaurantData: NewRestaurantDataInput): Restaurant => {
     const id = uuid();
     const newRestaurant: Restaurant = {
       ...newRestaurantData,
@@ -30,11 +30,16 @@ export class RestaurantService {
     };
     db.restaurants[id] = newRestaurant;
     return newRestaurant;
-  }
+  };
 
-  remove(id: string): Restaurant {
+  remove = (id: string): Restaurant => {
     const deletedRestaurant = db.restaurants[id];
+    this.removeRestaurantDishRelationShip(deletedRestaurant);
     delete db.restaurants[id];
     return deletedRestaurant;
-  }
+  };
+
+  private removeRestaurantDishRelationShip = (restaurant: Restaurant) => {
+    delete db.restaurantDishes[restaurant.id];
+  };
 }

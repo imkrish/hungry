@@ -1,13 +1,12 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "types": [
-      "node",
-      "jest",
-      "express"
-    ]
+    "target": "es2016",
+    "module": "commonjs",
+    "lib": ["es2016", "esnext.asynciterable"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "types": ["node", "jest", "express"]
   },
-  "include": [
-    "**/*.ts"
-  ]
+  "include": ["**/*.ts"]
 }

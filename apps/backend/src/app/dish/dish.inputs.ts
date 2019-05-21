@@ -12,4 +12,7 @@ export class NewDishDataInput {
 
   @Field()
   price: number;
+
+  @Field()
+  restaurantId: string;
 }

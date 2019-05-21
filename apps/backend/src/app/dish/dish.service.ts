@@ -6,11 +6,11 @@ import * as uuid from 'uuid/v4';
 import * as R from 'ramda';
 
 export class DishService {
-  findById(id: string): Dish {
+  findById = (id: string): Dish => {
     return db.dishes[id];
-  }
+  };
 
-  findAll(paginationArgs: PaginationArgs): Dish[] {
+  findAll = (paginationArgs: PaginationArgs): Dish[] => {
     const { skip, take } = paginationArgs;
     const sortById = R.sortBy(R.prop('creationDate'));
     const skipAndTake = R.slice(skip, skip + take);
@@ -19,9 +19,13 @@ export class DishService {
       sortById,
       R.values
     )(db.dishes) as Dish[];
-  }
+  };
 
-  create(newDishData: NewDishDataInput): Dish {
+  getDishIdsByRestaurantId = (restaurantId: string) => {
+    return db.restaurantDishes[restaurantId] || [];
+  };
+
+  create = (newDishData: NewDishDataInput): Dish => {
     const id = uuid();
     const newDish: Dish = {
       ...newDishData,
@@ -29,12 +33,31 @@ export class DishService {
       creationDate: Date.now()
     };
     db.dishes[id] = newDish;
+    this.makeRestaurantDishRelationShip(newDish);
     return newDish;
-  }
+  };
 
-  remove(id: string): Dish {
+  remove = (id: string): Dish => {
     const deletedDish = db.dishes[id];
     delete db.dishes[id];
+    this.removeRestaurantDishRelationShip(deletedDish);
     return deletedDish;
-  }
+  };
+
+  private makeRestaurantDishRelationShip = (dish: Dish) => {
+    const { restaurantId, id: dishId } = dish;
+    if (!db.restaurantDishes[restaurantId]) {
+      db.restaurantDishes[restaurantId] = [];
+    }
+    db.restaurantDishes[restaurantId].push(dishId);
+  };
+
+  private removeRestaurantDishRelationShip = (dish: Dish) => {
+    const { restaurantId, id: dishId } = dish;
+    if (db.restaurantDishes[restaurantId]) {
+      db.restaurantDishes[restaurantId] = db.restaurantDishes[
+        restaurantId
+      ].filter(id => id !== dishId);
+    }
+  };
 }
