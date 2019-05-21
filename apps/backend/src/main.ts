@@ -1,20 +1,22 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- **/
+import 'reflect-metadata';
+import { ApolloServer } from 'apollo-server';
+import { buildSchema } from 'type-graphql';
+import { RestaurantResolver } from './app/restaurant/restaurant.resolver';
 
-import * as express from 'express';
+const PORT = process.env.PORT || 4000;
 
-const app = express();
+async function bootstrap() {
+  const schema = await buildSchema({
+    resolvers: [RestaurantResolver]
+  });
 
-app.get('/api', (req, res) => {
-  res.send({message: `Welcome to backend!`});
-});
+  const server = new ApolloServer({
+    schema,
+    playground: true
+  });
 
-const port = process.env.port || 3333;
-app.listen(port, (err) => {
-  if (err) {
-    console.error(err);
-  }
-  console.log(`Listening at http://localhost:${port}`);
-});
+  const { url } = await server.listen(PORT);
+  console.log(`Server is running, GraphQL Playground available at ${url}`);
+}
+
+bootstrap();
