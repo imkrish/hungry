@@ -20,20 +20,20 @@ enum RestaurantsSubscriptions {
 
 @Resolver(Restaurant)
 export class RestaurantResolver {
-  restaurantsService: RestaurantService;
+  restaurantService: RestaurantService;
 
   constructor() {
-    this.restaurantsService = new RestaurantService();
+    this.restaurantService = new RestaurantService();
   }
 
   @Query(returns => Restaurant)
   restaurant(@Arg('id') id: string): Restaurant {
-    return this.restaurantsService.findById(id);
+    return this.restaurantService.findById(id);
   }
 
   @Query(returns => [Restaurant])
   restaurants(@Args() paginationArgs: PaginationArgs): Restaurant[] {
-    return this.restaurantsService.findAll(paginationArgs);
+    return this.restaurantService.findAll(paginationArgs);
   }
 
   @Mutation(returns => Restaurant)
@@ -42,14 +42,14 @@ export class RestaurantResolver {
     publish: Publisher<Restaurant>,
     @Arg('newRestaurantData') newRestaurantData: NewRestaurantDataInput
   ): Promise<Restaurant> {
-    const restaurant = this.restaurantsService.create(newRestaurantData);
+    const restaurant = this.restaurantService.create(newRestaurantData);
     await publish(restaurant);
     return restaurant;
   }
 
   @Mutation(returns => Restaurant)
   removeRestaurant(@Arg('id') id: string): Restaurant {
-    return this.restaurantsService.remove(id);
+    return this.restaurantService.remove(id);
   }
 
   @Subscription(returns => Restaurant, {
