@@ -40,9 +40,12 @@
     "core-js": "^2.5.4",
     "express": "4.16.3",
     "graphql": "^14.3.0",
+    "jsonfile": "^5.0.0",
+    "ramda": "^0.26.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "6.3.3",
     "type-graphql": "^0.17.4",
+    "uuid": "^3.3.2",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
@@ -56,7 +59,10 @@
     "@types/graphql": "^14.2.0",
     "@types/jest": "24.0.9",
     "@types/jquery": "3.3.6",
+    "@types/jsonfile": "^5.0.0",
     "@types/node": "~8.9.4",
+    "@types/ramda": "^0.26.8",
+    "@types/uuid": "^3.4.4",
     "codelyzer": "~4.5.0",
     "cypress": "3.1.0",
     "dotenv": "6.2.0",

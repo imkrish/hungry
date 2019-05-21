@@ -5,5 +5,8 @@ import { MaxLength } from 'class-validator';
 export class NewRestaurantDataInput {
   @Field()
   @MaxLength(50)
-  title: string;
+  name: string;
+
+  @Field()
+  imgUrl: string;
 }

@@ -2,10 +2,15 @@ import 'reflect-metadata';
 import { ApolloServer } from 'apollo-server';
 import { buildSchema } from 'type-graphql';
 import { RestaurantResolver } from './app/restaurant/restaurant.resolver';
+import { DBHandler } from './app/db/db';
+import { exitHandler } from './exit-handler';
 
 const PORT = process.env.PORT || 4000;
 
 async function bootstrap() {
+  DBHandler.read();
+  exitHandler();
+
   const schema = await buildSchema({
     resolvers: [RestaurantResolver]
   });

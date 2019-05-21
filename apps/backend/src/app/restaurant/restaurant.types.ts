@@ -6,11 +6,11 @@ export class Restaurant {
   id: string;
 
   @Field()
-  title: string;
+  name: string;
+
+  @Field()
+  imgUrl: string;
 
   @Field()
   creationDate: number;
-
-  @Field()
-  done: boolean;
 }
