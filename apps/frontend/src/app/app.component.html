@@ -3,7 +3,10 @@
     <div class="header__logo"><span>HUNGRY</span></div>
 
     <div>
-      <nz-badge [nzCount]="5" [nzStyle]="{ backgroundColor: '#1890FF' }">
+      <nz-badge
+        [nzCount]="restaurantCount$ | async"
+        [nzStyle]="{ backgroundColor: '#1890FF' }"
+      >
         <div class="badge__box">Restaurants</div>
       </nz-badge>
       <nz-badge

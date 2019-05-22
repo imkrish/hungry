@@ -17,3 +17,12 @@ export const RestaurantCreated = gql`
     }
   }
 `;
+
+export const CreateRestaurant = gql`
+  mutation createRestaurant($newRestaurantData: NewRestaurantDataInput!) {
+    createRestaurant(newRestaurantData: $newRestaurantData) {
+      name
+      imgUrl
+    }
+  }
+`;

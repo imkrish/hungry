@@ -1,0 +1,47 @@
+<div
+  class="container"
+  nz-row
+  nzType="flex"
+  nzJustify="space-between"
+  nzAlign="middle"
+>
+  <h1>Restaurants</h1>
+  <button nz-button nzType="primary" (click)="setDisplayModal(true)">
+    New
+  </button>
+</div>
+<div class="container" nz-row nzType="flex" nzJustify="start">
+  <div
+    nz-col
+    nzSpan="4"
+    class="p-10"
+    *ngFor="let restaurant of (allRestaurants$ | async)"
+  >
+    <nz-card nzHoverable [nzCover]="coverTemplate">
+      <nz-card-meta [nzTitle]="restaurant.name"></nz-card-meta>
+    </nz-card>
+    <ng-template #coverTemplate>
+      <img class="image" [src]="restaurant.imgUrl" />
+    </ng-template>
+  </div>
+</div>
+
+<nz-modal
+  nzTitle="New Restaurant"
+  [(nzVisible)]="displayModal"
+  (nzOnCancel)="setDisplayModal(false)"
+  (nzOnOk)="newRestaurant(nameInput, imgUrlInput)"
+>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Name</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <input #nameInput nz-input />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Image Url</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <input #imgUrlInput nz-input />
+    </nz-form-control>
+  </nz-form-item>
+</nz-modal>
