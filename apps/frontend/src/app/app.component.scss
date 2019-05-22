@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__logo {
+    background: #eee;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+}
+
+.content {
+  padding: 30px;
+  min-height: calc(100vh - 64px);
+}
+
+nz-badge {
+  margin-right: 50px;
+}
+
+.badge__box {
+  width: 100px;
+  padding: 5px;
+  border-radius: 4px;
+  background: #eee;
+  display: inline-block;
+  vertical-align: middle;
+}

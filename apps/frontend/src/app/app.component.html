@@ -1,1 +1,38 @@
-<router-outlet></router-outlet>
+<nz-layout class="layout" *ngIf="(currentUrl$ | async) as currentUrl">
+  <nz-header class="header">
+    <div class="header__logo"><span>HUNGRY</span></div>
+
+    <div>
+      <nz-badge [nzCount]="5" [nzStyle]="{ backgroundColor: '#1890FF' }">
+        <div class="badge__box">Restaurants</div>
+      </nz-badge>
+      <nz-badge
+        [nzCount]="0"
+        nzShowZero
+        [nzStyle]="{ backgroundColor: '#52c41a' }"
+      >
+        <div class="badge__box">Dishes</div>
+      </nz-badge>
+    </div>
+
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'">
+      <li
+        routerLink="/restaurants"
+        nz-menu-item
+        [nzSelected]="currentUrl === '/restaurants'"
+      >
+        Restaurants
+      </li>
+      <li
+        routerLink="/dishes"
+        nz-menu-item
+        [nzSelected]="currentUrl === '/dishes'"
+      >
+        Dishes
+      </li>
+    </ul>
+  </nz-header>
+  <nz-content class="content">
+    <router-outlet></router-outlet>
+  </nz-content>
+</nz-layout>

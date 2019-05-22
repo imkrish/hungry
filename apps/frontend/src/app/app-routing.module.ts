@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'restaurants', component: RestaurantsComponent },
   { path: 'restaurant/:id', component: RestaurantComponent },
   { path: 'dishes', component: DishesComponent },
-  { path: 'dish/:id', component: DishComponent }
+  { path: 'dish/:id', component: DishComponent },
+  { path: '**', redirectTo: '/restaurants' }
 ];
 
 @NgModule({
