@@ -3,7 +3,6 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { RestaurantService } from './restaurant/restaurant.service';
-import { NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'hungry-root',
@@ -16,8 +15,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private restaurantService: RestaurantService,
-    private notification: NzNotificationService
+    private restaurantService: RestaurantService
   ) {
     this.currentUrl$ = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
@@ -29,9 +27,5 @@ export class AppComponent implements OnInit {
       .pipe(map(restaurants => restaurants.length));
   }
 
-  ngOnInit() {
-    this.restaurantService.restaurantCreated().subscribe(restaurant => {
-      this.notification.blank('Restaurant Created', restaurant.name);
-    });
-  }
+  ngOnInit() {}
 }
