@@ -18,7 +18,10 @@ async function bootstrap() {
 
   const server = new ApolloServer({
     schema,
-    playground: true
+    playground: true,
+    subscriptions: {
+      path: '/'
+    }
   });
 
   const { url } = await server.listen(PORT);

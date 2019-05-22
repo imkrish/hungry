@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Apollo } from 'apollo-angular';
 
 @Component({
   selector: 'hungry-root',
@@ -11,7 +12,7 @@ import { Observable } from 'rxjs';
 export class AppComponent implements OnInit {
   currentUrl$: Observable<string>;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private apollo: Apollo) {}
 
   ngOnInit() {
     this.currentUrl$ = this.router.events.pipe(

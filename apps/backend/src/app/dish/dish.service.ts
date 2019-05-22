@@ -12,11 +12,13 @@ export class DishService {
 
   findAll = (paginationArgs: PaginationArgs): Dish[] => {
     const { skip, take } = paginationArgs;
-    const sortById = R.sortBy(R.prop('creationDate'));
+    const sortByCreationDateDesc = R.sortWith([
+      R.descend(R.prop('creationDate'))
+    ]);
     const skipAndTake = R.slice(skip, skip + take);
     return R.compose(
       skipAndTake,
-      sortById,
+      sortByCreationDateDesc,
       R.values
     )(db.dishes) as Dish[];
   };
