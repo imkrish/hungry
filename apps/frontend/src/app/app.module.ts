@@ -10,7 +10,6 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { AppRoutingModule } from './app-routing.module';
 import { RestaurantModule } from './restaurant/restaurant.module';
-import { DishModule } from './dish/dish.module';
 import { GraphQLModule } from './graphql.module';
 
 registerLocaleData(en);
@@ -28,7 +27,6 @@ registerLocaleData(en);
 
     //  Features
     RestaurantModule,
-    DishModule,
     GraphQLModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],

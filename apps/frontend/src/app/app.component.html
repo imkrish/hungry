@@ -9,31 +9,7 @@
       >
         <div class="badge__box">Restaurants</div>
       </nz-badge>
-      <nz-badge
-        [nzCount]="0"
-        nzShowZero
-        [nzStyle]="{ backgroundColor: '#52c41a' }"
-      >
-        <div class="badge__box">Dishes</div>
-      </nz-badge>
     </div>
-
-    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'">
-      <li
-        routerLink="/restaurants"
-        nz-menu-item
-        [nzSelected]="currentUrl === '/restaurants'"
-      >
-        Restaurants
-      </li>
-      <li
-        routerLink="/dishes"
-        nz-menu-item
-        [nzSelected]="currentUrl === '/dishes'"
-      >
-        Dishes
-      </li>
-    </ul>
   </nz-header>
   <nz-content class="content">
     <router-outlet></router-outlet>
