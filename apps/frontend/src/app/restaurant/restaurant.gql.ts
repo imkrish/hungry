@@ -1,28 +1,10 @@
 import gql from 'graphql-tag';
 
-export const RestaurantsNameImageUrl = gql`
-  query {
-    restaurants {
-      name
-      imgUrl
-    }
-  }
-`;
+// Todo: (Query) for restaurant, get only name and imgUrl attribute
+export const RestaurantsNameImageUrl = gql``;
 
-export const RestaurantCreated = gql`
-  subscription {
-    restaurantCreated {
-      name
-      imgUrl
-    }
-  }
-`;
+// Todo: (Mutation) to create restaurant
+export const CreateRestaurant = gql``;
 
-export const CreateRestaurant = gql`
-  mutation createRestaurant($newRestaurantData: NewRestaurantDataInput!) {
-    createRestaurant(newRestaurantData: $newRestaurantData) {
-      name
-      imgUrl
-    }
-  }
-`;
+// Todo: (Subscription) Listen to restaurant created event
+export const RestaurantCreated = gql``;

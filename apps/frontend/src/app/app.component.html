@@ -1,9 +1,10 @@
-<nz-layout class="layout" *ngIf="(currentUrl$ | async) as currentUrl">
+<nz-layout class="layout">
   <nz-header class="header">
     <div class="header__logo"><span>HUNGRY</span></div>
 
     <div>
       <nz-badge
+        [nzShowZero]="true"
         [nzCount]="restaurantCount$ | async"
         [nzStyle]="{ backgroundColor: '#1890FF' }"
       >
