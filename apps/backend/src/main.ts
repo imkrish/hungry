@@ -4,7 +4,6 @@ import { buildSchema } from 'type-graphql';
 import { RestaurantResolver } from './app/restaurant/restaurant.resolver';
 import { DBHandler } from './app/db/db';
 import { exitHandler } from './exit-handler';
-import { DishResolver } from './app/dish/dish.resolver';
 
 const PORT = process.env.PORT || 4000;
 
@@ -13,7 +12,7 @@ async function bootstrap() {
   exitHandler();
 
   const schema = await buildSchema({
-    resolvers: [RestaurantResolver, DishResolver]
+    resolvers: [RestaurantResolver]
   });
 
   const server = new ApolloServer({
