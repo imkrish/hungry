@@ -28,7 +28,7 @@ export type Mutation = {
 
 
 export type MutationCreateRestaurantArgs = {
-  newRestaurantData: NewRestaurantDataInput;
+  newRestaurantData: NewRestaurantDataInput
 };
 
 

@@ -1,8 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { Restaurant } from '../generated/graphql';
-import { filter, map, scan, startWith } from 'rxjs/operators';
-import { combineLatest, Observable, of } from 'rxjs';
+import {
+  Mutation,
+  MutationCreateRestaurantArgs,
+  Query,
+  Restaurant
+} from '../generated/graphql';
+import {
+  CreateRestaurant,
+  RestaurantCreated,
+  RestaurantsNameImageUrl
+} from './restaurant.gql';
+import { map, scan, startWith } from 'rxjs/operators';
+import { combineLatest, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +20,32 @@ import { combineLatest, Observable, of } from 'rxjs';
 export class RestaurantService {
   constructor(private apollo: Apollo) {}
 
-  // Todo: Query to get restaurant
   loadRestaurants(): Observable<Restaurant[]> {
-    return of([]);
+    return this.apollo
+      .query<Query>({ query: RestaurantsNameImageUrl })
+      .pipe(map(response => response.data.restaurants));
   }
 
-  // Todo: Mutation to create restaurant
-  createRestaurant(name: string, imgUrl: string): Observable<Restaurant> {
-    return of(null);
-  }
-
-  // Todo: Subscription
   restaurantCreated(): Observable<Restaurant> {
-    return of(null);
+    return this.apollo
+      .subscribe({
+        query: RestaurantCreated
+      })
+      .pipe(map(response => response.data.restaurantCreated));
+  }
+
+  createRestaurant(name: string, imgUrl: string): Observable<Restaurant> {
+    return this.apollo
+      .mutate<Mutation, MutationCreateRestaurantArgs>({
+        mutation: CreateRestaurant,
+        variables: {
+          newRestaurantData: {
+            name,
+            imgUrl
+          }
+        }
+      })
+      .pipe(map(response => response.data.createRestaurant));
   }
 
   listenToAllRestaurant() {
@@ -31,7 +54,6 @@ export class RestaurantService {
     const newRestaurants$: Observable<
       Restaurant[]
     > = this.restaurantCreated().pipe(
-      filter(Boolean),
       scan(
         (restaurants, newRestaurant) => {
           return [newRestaurant].concat(restaurants);
