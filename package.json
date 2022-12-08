@@ -45,7 +45,7 @@
     "apollo-link-ws": "^1.0.17",
     "apollo-server": "^2.5.0",
     "core-js": "^2.5.4",
-    "express": "4.16.3",
+    "express": "4.17.3",
     "graphql": "^14.3.0",
     "graphql-tag": "^2.10.0",
     "jsonfile": "^5.0.0",
